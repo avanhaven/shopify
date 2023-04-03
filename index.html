@@ -1,47 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <title>Three.js GLB Loader Example</title>
     <meta charset="utf-8">
-    <title>My 3D Model</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
         body {
             margin: 0;
-            padding: 0;
-            overflow: hidden;
         }
         canvas {
-            width: 100%;
-            height: 100%;
+            display: block;
         }
     </style>
 </head>
 <body>
-   <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-
-<script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@<version>/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.151.3/examples/jsm/"
-    }
-  }
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         var renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
+
         var loader = new THREE.GLTFLoader();
-        loader.load('https://drive.google.com/file/d/1xwcEIy4jqoG_Crf-DZs0kkw1WSeWWVb9', function (gltf) {
+        loader.load('https://drive.google.com/file/d/1xwcEIy4jqoG_Crf-DZs0kkw1WSeWWVb9', function(gltf) {
             scene.add(gltf.scene);
-        }, undefined, function (error) {
-            console.error(error);
         });
+
         camera.position.z = 5;
-        var animate = function () {
+
+        function animate() {
             requestAnimationFrame(animate);
             renderer.render(scene, camera);
-        };
+        }
         animate();
     </script>
 </body>
